@@ -1,0 +1,235 @@
+############1.for - else
+for i in [1,2,3,4]:
+    print(i)
+else:
+    print(i, '我是else')
+'''
+1
+2
+3
+4
+4 我是else
+'''
+
+for i in [1,2,3,4]:
+    if i > 2:
+        print(i)
+else:
+    print(i, '我是else')
+'''
+for 和 else 之间（循环体内）有第三者 if 插足,也不会影响 for 和 else 的关系,因为 for 的级别比 if 高
+3
+4
+4 我是else
+'''
+
+for i in [1,2,3,4]:
+    if i>2:
+        print(i)
+        break
+else:
+    print(i, '我是else')
+'''
+拆散 for 和 else 这对冤家呢？只有当 for 循环被 break 语句中断之后，才会跳过 else 语句
+3
+'''
+
+
+############2.一颗星()和两颗星(*)
+'''
+Python 函数支持默认参数和可变参数，
+一颗星表示不限数量的单值参数，
+两颗星表示不限数量的键值对参数
+'''
+def multi_sum(*args):
+    s = 0
+    for item in args:
+        s += item
+    return s
+multi_sum(3,4,5)  # 12
+
+def do_something(name, age, gender='男', *args, **kwds):
+    print('姓名：%s，年龄：%d，性别：%s'%(name, age, gender))
+    print(args)
+    print(kwds)
+do_something('xufive', 50, '男', 175, 75, math=99, english=90)
+'''
+姓名：xufive，年龄：50，性别：男
+(175, 75)
+{'math': 99, 'english': 90}  # 键值对
+'''
+
+
+############3.三元表达式
+打球去吧 if 不下雨 else 去自习室
+
+y = 5
+print('y是一个负数' if y < 0 else 'y是一个非负数')  #  y是一个非负数
+
+# 赋值
+y = 5
+x = -1 if y < 0 else 1  # 1
+
+
+############4.with - as
+# with 上下文管理协议，
+with 语句适合一些事先需要准备，事后需要处理的任务，
+比如，文件操作，需要先打开文件，操作完成后需要关闭文件
+# 不使用with，文件操作：
+fp = open(r"D:\CSDN\Column\temp\mpmap.py", 'r')
+try:
+    contents = fp.readlines()
+finally:
+    fp.close()
+
+# 使用with，文件操作：
+with open(r"D:\CSDN\Column\temp\mpmap.py", 'r') as fp:
+    contents = fp.readlines()
+    
+
+############5.列表推导式
+# 简化前：
+a = [1, 2, 3, 4, 5]
+result = []
+for i in a:
+  result.append(i*i)  
+result  # [1, 4, 9, 16, 25]
+
+# 简化后：
+a = [1, 2, 3, 4, 5]
+result = [i*i for i in a]
+result  # [1, 4, 9, 16, 25]
+#  《一行 Python 代码能实现什么丧心病狂的功能？》，里面的例子，都是列表推导式实现的
+
+############6.列表索引的各种骚操作
+a = [0, 1, 2, 3, 4, 5]
+a[2:4]  # [2, 3]
+a[3:]  # [3, 4, 5]
+a[:]  # [0, 1, 2, 3, 4, 5]
+
+a[::2]  # [0, 2, 4]  # 下标为偶数的元素
+a[1::2]  # [1, 3, 5]  # 下标为奇数的元素
+
+a[-1]  # 5 # 最后一个元素
+a[-2]  # 4 # 倒数第二个元素
+a[1:-1]  # [1, 2, 3, 4] # 不要最后一个元素
+a[::-1]  # [5, 4, 3, 2, 1, 0] # 数据转置
+
+a = [0, 1, 2, 3, 4, 5]
+b = ['a', 'b']
+a[2:2] = b
+a  # [0, 1, 'a', 'b', 2, 3, 4, 5]
+a[3:6] = b
+a  # [0, 1, 'a', 'a', 'b', 4, 5]
+
+############7.lambda函数
+g = lambda x,y: x+y
+g(3,4)
+
+# 使用排序函数sorted对多维数组或者字典排序时，就可以指定排序规则
+a = [{'name':'B', 'age':50}, {'name':'A', 'age':30}, {'name':'C', 'age':40}]
+sorted(a, key=lambda x:x['name']) # 按姓名排序
+[{'name': 'A', 'age': 30}, {'name': 'B', 'age': 50}, {'name': 'C', 'age': 40}]
+sorted(a, key=lambda x:x['age']) # 按年龄排序
+[{'name': 'A', 'age': 30}, {'name': 'C', 'age': 40}, {'name': 'B', 'age': 50}]
+
+# 一个数组元素求平方的例子
+a = [1,2,3]
+for item in map(lambda x:x*x, a):
+    print(item, end=', ')
+# 1, 4, 9,
+
+
+############8.yield 以及生成器和迭代器
+'''
+iterator（迭代器）---generator（生成器）---yield
+xrange()返回的就是一个迭代器，它可以像list那样被遍历，但又不占用多少内存
+generator（生成器）是一种特殊的迭代器，只能被遍历一次，遍历结束，就自动消失了
+不管是迭代器还是生成器，都是为了避免使用list，从而节省内存
+'''
+#  python内置了迭代函数 iter，用于生成迭代器
+a = [1,2,3]
+a_iter = iter(a)
+a_iter
+<list_iterator object at 0x000001B2DE434BA8>
+for i in a_iter:
+    print(i, end=', ')  # 1, 2, 3, 
+
+# yield 用于构造生成器
+def get_square(n):
+    result = list()
+    for i in range(n):
+        result.append(pow(i,2))
+    return result
+print(get_square(5))  # [0, 1, 4, 9, 16]
+# 计算1亿以内的所有整数的平方，这个函数的内存开销会非常大，这是 yield 就可以大显身手了
+def get_square(n):
+    for i in range(n):
+        yield(pow(i,2))
+
+a = get_square(5)
+a
+<generator object get_square at 0x000001B2DE5CACF0>
+for i in a:
+    print(i, end=', ')  # 0, 1, 4, 9, 16, 
+
+
+############9.装饰器
+'''
+定义很多个函数，在每个函数运行的时候要显示这个函数的运行时长，解决方案有很多
+可以在调用每个函数之前读一下时间戳，每个函数运行结束后再读一下时间戳，求差即可；
+也可以在每个函数体内的开始和结束位置上读时间戳，最后求差
+'''
+import time
+def timer(func):
+    def wrapper(*args,**kwds):
+        t0 = time.time()
+        func(*args,**kwds)
+        t1 = time.time()
+        print('耗时%0.3f'%(t1-t0,))
+    return wrapper
+
+@timer  #  装饰器
+def do_something(delay):
+    print('函数do_something开始')
+    time.sleep(delay)
+    print('函数do_something结束')
+
+do_something(3)
+函数do_something开始
+函数do_something结束
+耗时3.077
+
+'''
+@把它附加在任何一个函数（比如do_something）定义之前，就等于把新定义的函数，当成了装饰器函数的输入参数
+运行 do_something() 函数，可以理解为执行了timer(do_something)
+'''
+############10.巧用断言assert
+'''
+所谓断言，就是声明表达式的布尔值必须为真的判定，否则将触发 AssertionError 异常
+assert是调试手段，不宜使用在生产环境中
+比如，输入参数的格式、类型验证等
+'''
+
+def i_want_to_sleep(delay):
+    assert(isinstance(delay, (int,float))), '函数参数必须为整数或浮点数'
+    print('开始睡觉')
+    time.sleep(delay)
+    print('睡醒了')
+
+i_want_to_sleep(1.1)
+开始睡觉
+睡醒了
+i_want_to_sleep(2)
+开始睡觉
+睡醒了
+i_want_to_sleep('2')
+Traceback (most recent call last):
+  File "<pyshell#247>", line 1, in <module>
+    i_want_to_sleep('2')
+  File "<pyshell#244>", line 2, in i_want_to_sleep
+    assert(isinstance(delay, (int,float))), '函数参数必须为整数或浮点数'
+AssertionError: 函数参数必须为整数或浮点数
+
+
+
