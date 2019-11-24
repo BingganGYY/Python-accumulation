@@ -1,0 +1,174 @@
+######00python3所有常用语法
+00 程序流程图思维！！！画流程图写python（流程复杂）
+01 dir(__builtins__)  # 查询所有内置函数
+02 help(input)  # 帮助文档 ，input：用户输入字符串
+03 "字符串（文本）" + "字符串" = 拼接   数值+数值=和
+04 转义符号：\内容   原始字符串：r'内容
+05 random模块：每次运行程序产生答案是随机的，randint()  # TA返回一个随机整数
+06 数据类型：字符串:srr()、整型:int()、浮点型:float(),把浮点型转成整型---python截断处理效率高
+07 type()   isinstance(a, str)  # 获取类型信息
+08 /：除   %：取余数   **：幂   //：floor（地板）除法，不大于结果的最大整数  # 常用操作符
+09 幂运算---正负号---算数操作符---比较操作符---逻辑操作符（not and or）   # 优先级问题
+10 range(0,5,2)  # 0,2,4  0开始（默认，可不写），5结束（取头不取尾），以2为增量的数字序列
+
+11 列表整理
+	01 [7, 1, 2]  ["大朋", 520 , "小媛"]  []
+	02 temp_list = []  temp_list.append('嘻嘻')  # 向列表末尾一次添加一个元素
+	03 temp_list.extend(["嘻嘻", "哈哈", "啦啦"])  # 向列表末尾一次添加一个列表，即一次添加多个元素  extend?
+	04 temp_list.insert(0, "嘻嘻")  # 向列表指定位置插入一个元素
+
+	05 a_list[0]  # 列表索引
+	06 temp_list = a_list[0]  a_list[0] = a_list[1] a_list[1] = temp_list  # 列表元素互换位置，需引入中间变量
+
+	07 a_list.remove('哈哈')  # 从列表中删除一个元素
+	08 del a_list[0]  del a_list  # 按索引删除一个元素or删除整个列表
+	09 a_list.pop(0)  a_list.pop()  # 按索引删除一个元素or只删除最后一个元素
+
+	10 a_list[1:3]  a_list[:3]  a_list[1:]  a_list[:]  # 列表切片：取头不取尾  ==[0:3]  ==从索引位置1到最后全部  列表复制
+	11 比较运算符：a_list > b_list  # 当有多个元素，默认从第一个元素开始比较。只要一个元素赢了，就赢了，不考虑后面
+	12 逻辑运算符：(a_list > b_list) and (a_list == b_list)  
+	13 连接运算符：c_list = a_list + b_list  # 相当于extend(),但extend()更规范
+	14 重复运算符：a_list * 3  # 复制3次
+	15 成员关系运算符：'哈哈' not in a_list[1]  # 只能判断同一个层次的成员关系
+	
+	16 dir(a_list)  # 
+	17 a_list.count("哈哈")  # 计算某一个元素在列表中出现的次数
+	18 a_list.index(123)  a_list.index(123, 3, 7)  # 123在该列表第一次出现的索引  123在该列表指定位置(3, 7)第一次出现的索引 
+	19 a_list.reverse()  # 整个列表翻转
+	20 a_list.sort()  a_list.sort(reverse=True)  #  从小到大  从大到小  排序
+	21 b_list = a_list[:]  b_list = a_list  # 第一种，b改变不会影响a  第二种，会影响
+	
+12 元组整理
+	01 (7, 12, 6, 20)  # 数据结构一致
+	02 1.不可随意插入、删除某个元素  2.不可改变--不能进行原地排序，不能改变任一元素
+	03 a_tuple[1]   a_tuple[5:]   a_tuple[:]
+	04 元组的关键是",",而不是()  (1)---type:int  (1,)---tuple
+	05 更新元组---拼接更新：a_tuple = ("东", "南", "西", "北")  a_tuple=a_tuple[:2] + ("中",) + a_tuple[2:]
+	06 删除元组：del a_tuple
+	07 元组相关操作符：拼接、重复、关系、逻辑、成员
+
+13 字符串整理
+	01 a_str[:6]  a_str[5]  
+	02 更新字符串---拼接更新：a_str = a_str[:6] + '插入的字符串' + a_str[6:]
+	
+	03 a_str.capitalize()  # 第一个字符变大写
+	04 a_str.casefold()  # 所有字符变小写
+	05 a_str.center(60)  # 将字符串居中，并用”空格“填充至长度为60的新字符串，左右均填充
+	   a_str.ljust(width)  # 返回左对齐字符串，使用空格填充至长度为width的新字符串
+	   a_str.rjust(width)
+	   
+	06 a_str.count(子字符串, 开始位置, 结束位置)  # 子字符串在字符串的指定位置中出现的次数
+	
+	07 a_str.endswith(子字符串)  # 检查子符串是否以字符串结尾
+	08 a_str.startswith(子字符串) #  检查子符串是否以字符串结尾
+	09 a_str.expandtabs()  # 把字符串中的tab符号(\t)转化成空格，不指定参数，默认为8个空格
+	
+	10 a_str.find(子字符串)  # 检查子字符串是否包含在字符串中，有返回第一个字符索引值， 无返回-1
+	11 a_str.index(子字符串)  # 检查子字符串是否包含在字符串中，有返回第一个字符索引值，无抛出异常
+	12 a_str.rfind()  # 从右边开始查找，类似于find
+	13 a_str.rindex()  # 从右边开始查找，类似于index
+	
+	14 a_str.isalnum()  # string至少有一个字符，且所有字符都是数字或字母
+	15 a_str.isalpha()  # string至少有一个字符，且所有字符都是字母
+	16 a_str.isnumeric()  # string至少有一个字符，且所有字符都是数字或字母
+	17 a_str.isdecimal()  # string只包含十进制数字
+	18 a_str.isdigit()  # string只包含数字
+	
+	19 a_str.islower()
+	20 a_str.isupper()
+	21 a_str.lower()  # 所有大写转小写
+	22 a_str.upper()  # 所有小写转大写
+	
+	23 a_str.isspace()  # string只包含空格
+	24 a_str.istitle()  # string是标题化，以大写字母开头，其余为小写字母
+	25 a_str.title()  # 返回标题化字符串
+	26 重点：a_str = 'ok'   a_str.join('abcde')   'aokbokcokdoke'
+	27 a_str.strip()  # 删除左右两边空格，中间不删，也可以指定字符删除
+	28 a_str.rstrip()
+	29 a_str.lstrip()
+	
+	30 a_str.partition(sub)  # 找到子字符串，把其分成一个三元组， (pre_sub, sub, back_sub)
+	31 a_str.replace(old_sub, new_sub, count)  # old子字符串替换为new子字符串，替换不超过count次
+	32 a_str.split()  # 切片，默认以空格为分隔符
+	33 a_str.splitlines()  # 按”\n“分割
+	34 a_str.swapcase()  # 大小写翻转
+	35 a_str.translate(str.maketrans("s","b"))  # 将所有的s转为b
+	36 a_str.zfill(width)  # 返回长度为width的字符串，原字符串右对齐，前面用0填充，z:zero
+	
+	37 "{0} love {1} {2}".format("I", "big", "peng")  # {}：位置参数
+	   "{a} love {b} {c}".format(a="I", b="big", c="peng")  
+	   "{{a}}".format()
+       "{0:.1f}{1}".format(27.658, "GB")  # :--格式化开始，.1f--四舍五入保留一位小数
+	   
+	38 %c--格式化字符以及ASCII码  '%c %c %c' % (97, 98, 99)  'a b c'
+	   %s--格式化字符串  '%s' % 123  '123''
+	   %d--格式化整数  '%d + %d = %d' % (4, 5, 4+5)
+	   %f--格式化定点数，指定小数点后的精度  '%f' % 27.12 '27.120000'，默认6位小数
+	   %e--格式化科学计数法定点数，e  '%e' % 27.685 '2.768500e+01'
+	   %E--格式化科学计数法定点数，E  '%E' % 27.685 '2.768500E+01'
+
+    39 m.n  #m:显示最小总宽度，n：小数点后的位数
+	   '%5.1f' % 27.685  ' 27.7'
+	40 '%-10d' % 6 '6         '  # -是左对齐
+	41 '%010d' % 6 '0000000006'
+	42 字符串转义字符
+	   \n:换行符
+	   \t:横向制表符（tab）
+	   \v:纵向制表符
+	   \r:回车
+	   \f:换页
+	   
+14 序列整理
+   01 列表[]、元组()、字符串  1.索引可得到每一个元素；2.索引从0开始；3.分片得到一个范围的元素集合；4.共同的操作符
+   02 list()  # 转换成列表
+      tuple()
+	  str()
+	  sorted()==list.sort()
+	  
+	  numbers = [1, 18, 13, 0, -98, 34]
+      list(reversed(numbers))  [34, -98, 0, 13, 18, 1]
+	  list(enumerate(numbers)) [(0, 1), (1, 18), (2, 13), (3, 0), (4, -98), (5, 34)]
+	  
+	  
+	  a = [1,2,3,4,5,6,7]
+	  b = [4,5,6,7,8]
+	  list(zip(a,b))  # [(1, 4), (2, 5), (3, 6), (4, 7), (5, 8)]
+	  
+15 函数整理
+优秀的东西永远是经典的，经典的东西永远是简单的
+	01 def MyFirstFunction(name)： # name:形参，表示占据一个参数的位置
+	   MyFirstFunction('Amber')  # 'Amber'：实参，表示具体的参数值
+	02 函数文档：
+		MyFirstFunction.__doc__ # .表示前面是后面的一个属性，__开始，__结束，表示系统的特殊属性
+		help(MyFirstFunction)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+    03 局部变量---在函数里定义的参数以及变量
+       全局变量---整个代码都可以访问到，不要试图在函数内部去修改（python会在函数内部生成一个全新的命名一样的局部变量代替它，屏蔽的方式保护全局变量），但是可以在函数内部读取它的值
+	04 global： 用于在“函数内”指定“某局部变量”为“外部全局变量” global 变量名
+    05 递归：属于算法的范畴，递归两个条件：1.调用函数自身；2.设置自身正确返回值 “普通程序员用迭代，天才程序员用递归”
+
+16 字典整理
+	01 字典不是序列，它是映射
+	02 创建字典的方式：
+	   (1)a_dict = {'打招呼1':'hi', '打招呼2':'hello' }
+	   (2)b_dict = dict((('打招呼1','hi'), ('打招呼2','hello')))  # 第一个小括号：函数，第二个小括号：元组
+	   (3)c_dict = dict(打招呼1='hi', 打招呼2='hello')
+	03 d_dict = {} d_dict.fromkeys((1,2,3)) d_dict.fromkeys((1,2,3), 'number') # 所有键对应的值都一样，不能单独指定
+	04 访问字典的几个方法： 
+	   (1)a_dict.keys() # 返回键
+	   (2)a_dict.values() # 返回值
+	   (3)a_dict.items() # 返回项
+	   (4)a_dict.get('打招呼2') # 返回键对应的值
+	04 检查字典中某个键是否存在：'打招呼2' in a_dict
+	05 清空字典:a_dict.clear()
+	06 添加一项:
+	   a_dict.setdefault('打招呼3') # 只添加键
+	   a_dict.setdefault('打招呼3', '你好') # 添加项方法1
+	   adds = {'打招呼3':'你好'} a_dict.update(adds) # 添加项方法2
+	   
+17 集合整理
+	01 集合，唯一，但无序
+	02 a_set = set({1,5,6,1,1,2,2,2,3,9,0,2,19}) # {0, 1, 2, 3, 5, 6, 9, 19} 从小到大去重排序
+	03 集合添加元素：a_set.add(7)
+	04 集合删除元素：a_set.remove(5)
+	05 不可变集合：b_set = frozenset(set({1,5,6,1,1,2,2,2,3,9,0,2,19}))  # frozenset({0, 1, 2, 3, 5, 6, 9, 19}),不可以add()和remove()
+
