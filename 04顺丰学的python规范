@@ -1,0 +1,28 @@
+import datetime
+import time
+import calendar
+import pandas as pd
+import numpy as np
+
+class DateTimeModel(object):  # 类：要写object
+
+    # 要有各个方法的注释，解释该方法用途，每个方法要有一个空格
+    # 获取当天时间
+    def get_today(self):  # 方法：要写self
+        data_time = datetime.datetime.now().strftime('%Y-%m-%d')
+        return data_time
+    
+    # 多个参数要有参数解释 解释内容模板见""" """    
+    # 分页
+    def page_data(self, result, current_page=1, page_size=10):
+        """
+        分页函数
+        :param result 列表
+        :param current_page 当前页
+        :param page_size 页大小
+        """
+        if page_size > len(result):
+            current_page = 1
+        f = lambda a: map(lambda b: a[b: b + page_size], range(0, len(a), page_size))
+        s = list(f(result))
+        return s[current_page - 1] if s else []
