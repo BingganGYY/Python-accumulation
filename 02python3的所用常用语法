@@ -172,3 +172,35 @@
 	04 集合删除元素：a_set.remove(5)
 	05 不可变集合：b_set = frozenset(set({1,5,6,1,1,2,2,2,3,9,0,2,19}))  # frozenset({0, 1, 2, 3, 5, 6, 9, 19}),不可以add()和remove()
 
+18 文件
+	01 f = open("路径", "w")  # "w"："写入"方式打开文件，会覆盖已经存在的文件；"a"："写入"方式打开文件，文件存在则末尾追加写入；"r"：只读方式打开文件（默认）
+	   f.write("媛媛") 
+	   f.close()  # 关闭文件，有写入操作需关闭文件，否则不会保存
+	   f.read(size=-1)  #从文件中读取size个字符，空or负数全部读取
+	   f.tell()  # 返回当前文件中的位置，一个中文字符占两个字节
+	   f.seek(offset, from)  # 在文件中移动文件指针，从from（0：文件起始位置，1：当前位置，2：末尾位置）偏移offset个字节
+	   f.writelines(seq)  # 向文件中写入字符串序列seq，seq一个返回字符串的可迭代对象
+	   
+19 os模块
+    01 模块：包含所有你定义的函数和变量的文件，后缀名.py，可以被别的程序引入，以使用该模块中的函数等功能
+	02 os模块
+	   Operating System 操作系统，常用操作系统：Windows、Linux。。。 os模块不需关注什么操作系统下使用什么模块，会帮助选择正确的模块并调用
+	   import os
+	   os.getcwd()  # 返回当前目录
+	   os.chdir('path')  # 改变工作目录
+	   os.listdir(path='.')  # 列举指定目录中的文件名（'.'：当前目录  '..'：上一级目录）
+       。。。笔记还有 用到再补记
+    04 pickle模块
+       将列表存储成文件
+       import pickle
+	   my_list = [123, 410, '媛媛', ['another list']]
+	   # 写入
+	   pickle_file = open('my_list.pkl', 'wb')
+	   pickle.dump(my_list, pickle_file)
+	   pickle_file.close()
+	   # 读取
+	   pickle_file = open('my_list.pkl', 'rb')
+	   my_list2 = pickle.load(pickle_file)
+       	   
+	   
+
