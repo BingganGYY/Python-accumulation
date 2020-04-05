@@ -202,5 +202,8 @@
 	   pickle_file = open('my_list.pkl', 'rb')
 	   my_list2 = pickle.load(pickle_file)
        	   
-	   
+20 安装
+	pip uninstall pyecharts
+	pip install pyecharts==0.5.11
+	pip install pyecharts
 
