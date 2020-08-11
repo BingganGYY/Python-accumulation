@@ -78,7 +78,49 @@ class DateTimeModel(object):  # 类：要写object
         return s[current_page - 1] if s else []
 
 
+#######5.连接数据库
+pip install pymysql -i https://pypi.tuna.tsinghua.edu.cn/simple # 安装pymysql
+##-----(1)导入所需库包----------------------------------
+import numpy as np
+import pandas as pd
+import datetime
+import os
+import pymysql
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+# 忽略数据库警告
+import warnings
+warnings.filterwarnings("ignore",category=pymysql.Warning)
 
+##-----(2)读数据,连接database--------------------------
+def get_target_data():
+    conn = pymysql.connect(
+        host='10.203.39.154',
+        user='tdata',
+        password='DuQ5cd1xb$%x',
+        database='tdata',
+        charset='utf8')
+    # 定义将要执行的SQL语句
+    cursor = conn.cursor()
+    sql1 = '''SELECT
+             t1.room,
+                t1.product,
+                t1.host_ip
+            FROM
+             tdata_res_life_cycle_rdb_host_day t1
+            WHERE
+             t1.date_time ='20200804'
+            '''
+    cursor.execute(sql1) 
+    data = cursor.fetchall() 
+    df_target = pd.DataFrame(list(data))  
+    if len(df_target)==0:
+        pass
+    else:
+        df_target.columns = ['room', 'product','host_ip']
+    cursor.close()
+    conn.close()
+    return df_target
 
 
 
